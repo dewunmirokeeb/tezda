@@ -9,6 +9,20 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.2
+  shared_preferences: ^2.1.1
+  flutter_otp_text_field: ^1.1.1
+  get_it: ^7.6.0
+  smooth_page_indicator: ^1.1.0
+  collection: ^1.15.0
+  font_awesome_flutter: ^10.4.0
+  http: ^0.13.4
+  phone_text_field: ^0.0.6
+  http_parser: ^4.0.2
+  cached_network_image: ^3.3.0
+  fluttertoast: ^8.2.2
+  intl_phone_number_input: ^0.7.3+1
+  flutter_hooks: ^0.20.4
+  hooks_riverpod: ^2.3.6
 
 dev_dependencies:
   flutter_test:
