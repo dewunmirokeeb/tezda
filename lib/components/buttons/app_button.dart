@@ -8,11 +8,13 @@ class AppButton extends StatelessWidget {
     required this.onTap,
     this.buttonText = "button text",
     this.isLoading = false,
+    this.buttonWidth,
     super.key,
   });
   final Function() onTap;
   final bool isLoading;
   final String buttonText;
+  final double? buttonWidth;
 
   @override
   Widget build(BuildContext context) {
@@ -20,11 +22,11 @@ class AppButton extends StatelessWidget {
       style: ElevatedButton.styleFrom(
         elevation: 0,
         padding: const EdgeInsets.all(5),
-        backgroundColor: AppColors.primary5,
+        backgroundColor: AppColors.primaryColor,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(5),
         ),
-        fixedSize: Size(SpaceConstants.screenWidth() - 40, 48),
+        fixedSize: Size(buttonWidth ?? SpaceConstants.screenWidth() - 40, 48),
       ),
       onPressed: onTap,
       child: Visibility(
@@ -32,7 +34,7 @@ class AppButton extends StatelessWidget {
         replacement: Text(
           buttonText,
           style: TextStyles.buttonTextStyle.copyWith(
-            color: AppColors.complementary400,
+            color: AppColors.white,
           ),
         ),
         child: const Padding(

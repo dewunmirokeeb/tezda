@@ -1,65 +1,62 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_statusbarcolor_ns/flutter_statusbarcolor_ns.dart';
+import 'package:tezda_assessment/constant/colors.dart';
+import 'package:tezda_assessment/core/app_set_up/app.dart';
+import 'package:tezda_assessment/core/app_set_up/locator.dart';
+import 'package:tezda_assessment/core/route_service/navigation_service.dart';
+import 'package:tezda_assessment/core/route_service/routes.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart' as pro;
+import 'package:tezda_assessment/features/onboarding/splash.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  await appSetUp();
+  runApp(
+    const pro.ProviderScope(
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+    FlutterStatusbarcolor.setStatusBarColor(Colors.white);
+    SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(
+        statusBarIconBrightness: Brightness.dark,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
-  }
-}
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-  final String title;
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
+    return NotificationListener<OverscrollIndicatorNotification>(
+      onNotification: (oversroll) {
+        oversroll.disallowIndicator();
+        return true;
+      },
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: "Tezda Assessment",
+        theme: ThemeData(
+          canvasColor: AppColors.neutral,
+          appBarTheme: const AppBarTheme(
+            color: AppColors.neutral2,
+            foregroundColor: AppColors.neutral3,
+            elevation: 0,
+            iconTheme: IconThemeData(
+              color: Colors.black,
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
+          ),
+          scaffoldBackgroundColor: Colors.white,
+          colorScheme: const ColorScheme.light(
+            primary: Colors.white,
+          ),
+          useMaterial3: true,
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
+        navigatorKey: locatorX<NavigationService>().navigatorKey,
+        onGenerateRoute: (settings) => generateRoute(settings),
+        home: const SplashScreen(),
       ),
     );
   }
