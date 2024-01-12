@@ -31,7 +31,7 @@ This Flutter app is a solution for the assessment provided by [TEZDA Ltd]. The g
 ## Getting Started
 To run this application locally, follow these steps:
 
-1. Clone the repository: `git clone https://github.com/dewunmirokeeb/tezda`
+1. Clone the repository: `https://github.com/dewunmirokeeb/tezda.git`
 2. Navigate to the project directory: `cd [project-directory]`
 3. Install dependencies: `flutter pub get`
 4. Run the app: `flutter run`
